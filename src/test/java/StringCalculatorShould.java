@@ -15,4 +15,29 @@ public class StringCalculatorShould {
     public void return_0() {
         assertThat(stringCalculator.Add(""), is(0));
     }
+
+    @Test
+    public void return_1() {
+        assertThat(stringCalculator.Add("1"), is(1));
+    }
+
+    @Test
+    public void return_2() {
+        assertThat(stringCalculator.Add("2"), is(2));
+    }
+
+    @Test
+    public void return_3() {
+        assertThat(stringCalculator.Add("1,2"), is(3));
+    }
+
+    @Test
+    public void return_4() {
+        assertThat(stringCalculator.Add("2,2"), is(4));
+    }
+
+    @Test
+    public void return_27() {
+        assertThat(stringCalculator.Add("20,7"), is(27));
+    }
 }
