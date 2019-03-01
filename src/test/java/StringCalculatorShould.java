@@ -40,4 +40,9 @@ public class StringCalculatorShould {
     public void return_27() {
         assertThat(stringCalculator.Add("20,7"), is(27));
     }
+
+    @Test
+    public void return_53() {
+        assertThat(stringCalculator.Add("40,13"), is(53));
+    }
 }
