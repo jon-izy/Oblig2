@@ -55,9 +55,17 @@ public class StringCalculatorShould {
     public void return_55() {
         assertThat(stringCalculator.add("1,2,3,4,5,6,7,8,9,10"), is(55));
     }
-    //Allow the Add method to handle new lines between numbers (instead of commas).
+
     @Test
     public void return_6() {
         assertThat(stringCalculator.add("1\n2,3"), is(6));
     }
+    //Support different delimiters
+    //to change a delimiter, the beginning of the string will contain a separate line that looks like this:
+    // “//[delimiter]\n[numbers…]” for example “//;\n1;2” should return three where the default delimiter is ‘;’ .
+    @Test
+    public void return_3_with_custom_delimiters() {
+        assertThat(stringCalculator.add("//;\n1;2"), is(3));
+    }
+
 }
