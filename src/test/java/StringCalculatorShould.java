@@ -55,4 +55,9 @@ public class StringCalculatorShould {
     public void return_55() {
         assertThat(stringCalculator.add("1,2,3,4,5,6,7,8,9,10"), is(55));
     }
+    //Allow the Add method to handle new lines between numbers (instead of commas).
+    @Test
+    public void return_6() {
+        assertThat(stringCalculator.add("1\n2,3"), is(6));
+    }
 }
