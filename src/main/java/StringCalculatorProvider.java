@@ -21,8 +21,7 @@ public class StringCalculatorProvider {
   }
 
   private List<Integer> fromStringToNumber(String[] splittedNumbers) {
-      List<Integer> collect = Arrays.stream(splittedNumbers).map(number -> Integer.parseInt(number)).collect(Collectors.toList());
-      return  collect;
+      return Arrays.stream(splittedNumbers).map(number -> Integer.parseInt(number)).collect(Collectors.toList());
   }
 
 }
