@@ -45,4 +45,9 @@ public class StringCalculatorShould {
     public void return_53() {
         assertThat(stringCalculator.Add("40,13"), is(53));
     }
+
+    @Test
+    public void return_99() {
+        assertThat(stringCalculator.Add("33,33,33"), is(99));
+    }
 }
