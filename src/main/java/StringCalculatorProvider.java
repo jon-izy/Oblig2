@@ -1,6 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class StringCalculatorProvider {
 
   public int Add(String numbers) {
@@ -11,7 +8,11 @@ public class StringCalculatorProvider {
 
   private int parseStringsToNumber(String numbers) {
       String[] splittedString = splitOnComma(numbers);
-      return Integer.parseInt(splittedString[0]) + Integer.parseInt(splittedString[1]);
+      int sum = 0;
+      for (int i = 0; i < splittedString.length; i ++) {
+        sum += Integer.parseInt(splittedString[i]);
+      }
+      return sum;
   }
 
   private String[] splitOnComma(String numbers) {
