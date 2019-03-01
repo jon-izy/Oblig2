@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 public class StringCalculatorProvider {
 
   public int Add(String numbers) {
-      if (numbers.length() > 1) return parseStringsToNumber(numbers);
+      if (numbers.length() > 1) return numbersFromString(numbers);
       if (numbers != "") return Integer.parseInt(numbers);
       return 0;
   }
 
-  private int parseStringsToNumber(String numbers) {
+  private int numbersFromString(String numbers) {
       List<Integer> numbersSplitted = fromStringToNumber(splitOnComma(numbers));
       return numbersSplitted.stream().reduce(0, (a, b) -> a +b);
   }
