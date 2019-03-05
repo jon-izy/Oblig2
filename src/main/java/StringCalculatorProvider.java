@@ -34,12 +34,15 @@ public class StringCalculatorProvider {
     }
 
     private int IntOrException(String number) {
-        if (Integer.parseInt(number) < 0) throw new NegativesNumbersException();
-        return Integer.parseInt(number);
+        int stringToNumber = Integer.parseInt(number);
+        if (stringToNumber < 0) throw new NegativesNumbersException("negatives not allowed: " + stringToNumber);
+        return stringToNumber;
     }
 
     public class NegativesNumbersException extends IllegalArgumentException {
-
+        public NegativesNumbersException(String message) {
+            super(message);
+        }
     }
 
 }
