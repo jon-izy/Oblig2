@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static stringcalculator.ConcatNumbersByComma.concatNumbers;
+
 class StringCalculatorProvider {
 
     int add(String numbers) {
@@ -23,11 +25,12 @@ class StringCalculatorProvider {
         for (Integer integer : numbersSplit) {
             if (integer < 0) negativeNumbers.add(integer);
         }
-        if (negativeNumbers.size() > 0) throw new NegativesNumbersException("negatives not allowed: " +  negativeNumbers);
+        if (negativeNumbers.size() > 0) throw new NegativesNumbersException("negatives not allowed: " +  concatNumbers(negativeNumbers));
 
     }
 
     private String[] splitOnComma(String numbers) {
+
         String delimiters;
         if (numbers.startsWith("/")) {
             String customDelimiter = "" + numbers.charAt(2);
