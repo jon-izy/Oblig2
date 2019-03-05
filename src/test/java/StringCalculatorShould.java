@@ -76,4 +76,18 @@ public class StringCalculatorShould {
         assertThat(stringCalculator.add("//z\n1z2"), is(3));
     }
 
+    //Calling Add with a negative number will throw an
+    //exception “negatives not allowed” -
+    //and the negative that was passed.if there are multiple negatives,
+    //show all of them in the exception message
+
+    @Test(expected = StringCalculatorProvider.NegativesNumbersException.class)
+    public void throw_exception_negatives_not_allowed() {
+        stringCalculator.add("-1");
+    }
+
+//    @Test(expected = StringCalculatorProvider.NegativesNumbersException.class)
+//    public void throw_exception_negatives_not_allowed() {
+//        stringCalculator.add("-1");
+//    }
 }
