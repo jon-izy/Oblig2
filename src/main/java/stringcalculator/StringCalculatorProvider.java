@@ -17,7 +17,7 @@ class StringCalculatorProvider {
     private int adding(String numbers) {
         List<Integer> numbersSplit = fromStringToNumber(splitOnComma(numbers));
         checkForNegativeNumbers(numbersSplit);
-        return numbersSplit.stream().reduce(0, (a, b) -> a + b);
+        return numbersSplit.stream().filter(n -> n <= 1000).reduce(0, (a, b) -> a + b);
     }
 
     private void checkForNegativeNumbers(List<Integer> numbersSplit) {
@@ -30,7 +30,6 @@ class StringCalculatorProvider {
     }
 
     private String[] splitOnComma(String numbers) {
-
         String delimiters;
         if (numbers.startsWith("/")) {
             String customDelimiter = "" + numbers.charAt(2);

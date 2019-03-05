@@ -90,10 +90,21 @@ public class StringCalculatorShould {
         exceptionRule.expectMessage("negatives not allowed: -1");
         stringCalculator.add("-1");
     }
+
     @Test
     public void throw_exception_negatives_not_allowed_listing_numbers_two_negatives() {
         exceptionRule.expect(StringCalculatorProvider.NegativesNumbersException.class);
         exceptionRule.expectMessage("negatives not allowed: -1, -2");
         stringCalculator.add("-1,-2");
+    }
+
+    @Test
+    public void return_8() {
+        assertThat(stringCalculator.add("8,1001"), is(8));
+    }
+
+    @Test
+    public void return_1008() {
+        assertThat(stringCalculator.add("8,1000"), is(1008));
     }
 }
