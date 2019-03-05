@@ -1,5 +1,8 @@
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -76,18 +79,19 @@ public class StringCalculatorShould {
         assertThat(stringCalculator.add("//z\n1z2"), is(3));
     }
 
-    //Calling Add with a negative number will throw an
-    //exception “negatives not allowed” -
-    //and the negative that was passed.if there are multiple negatives,
-    //show all of them in the exception message
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
-    @Test(expected = StringCalculatorProvider.NegativesNumbersException.class)
-    public void throw_exception_negatives_not_allowed() {
+    @Test
+    public void throw_exception_negatives_not_allowed_listing_numbers() {
+        exceptionRule.expect(StringCalculatorProvider.NegativesNumbersException.class);
+        exceptionRule.expectMessage("negatives not allowed: [-1]");
         stringCalculator.add("-1");
     }
-
-//    @Test(expected = StringCalculatorProvider.NegativesNumbersException.class)
-//    public void throw_exception_negatives_not_allowed() {
-//        stringCalculator.add("-1");
-//    }
+    @Test
+    public void throw_exception_negatives_not_allowed_listing_numbers_two_negatives() {
+        exceptionRule.expect(StringCalculatorProvider.NegativesNumbersException.class);
+        exceptionRule.expectMessage("negatives not allowed: [-1, -2]");
+        stringCalculator.add("-1,-2");
+    }
 }

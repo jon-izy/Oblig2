@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,17 @@ public class StringCalculatorProvider {
 
     private int adding(String numbers) {
         List<Integer> numbersSplitted = fromStringToNumber(splitOnComma(numbers));
+        checkForNegativeNumbers(numbersSplitted);
         return numbersSplitted.stream().reduce(0, (a, b) -> a + b);
+    }
+
+    private void checkForNegativeNumbers(List<Integer> numbersSplitted) {
+        ArrayList<Integer> negativeNumbers = new ArrayList<>();
+        for (int i = 0; i < numbersSplitted.size(); i++) {
+            if (numbersSplitted.get(i) < 0) negativeNumbers.add(numbersSplitted.get(i));
+        }
+        if (negativeNumbers.size() > 0) throw new NegativesNumbersException("negatives not allowed: " + negativeNumbers);
+
     }
 
     private String[] splitOnComma(String numbers) {
@@ -27,15 +38,16 @@ public class StringCalculatorProvider {
     }
 
     private List<Integer> fromStringToNumber(String[] splittedNumbers) {
-        return Arrays
+        List<Integer> stringsToNumbers = Arrays
                 .stream(splittedNumbers)
-                .map(number -> IntOrException(number))
+                .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
+
+        return stringsToNumbers;
     }
 
     private int IntOrException(String number) {
         int stringToNumber = Integer.parseInt(number);
-        if (stringToNumber < 0) throw new NegativesNumbersException("negatives not allowed: " + stringToNumber);
         return stringToNumber;
     }
 
