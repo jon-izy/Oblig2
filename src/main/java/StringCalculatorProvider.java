@@ -15,8 +15,14 @@ public class StringCalculatorProvider {
   }
 
   private String[] splitOnComma(String numbers) {
-      String delimiters = "\\,|\n";
-      return numbers.split(delimiters);
+      String delimiters;
+      if (numbers.startsWith("/")) {
+          delimiters = "\n|;";
+          return numbers.substring(3).replaceAll("\\s+","").split(delimiters);
+      } else {
+          delimiters = "\\,|\n";
+          return numbers.split(delimiters);
+      }
   }
 
   private List<Integer> fromStringToNumber(String[] splittedNumbers) {
