@@ -17,7 +17,8 @@ public class StringCalculatorProvider {
   private String[] splitOnComma(String numbers) {
       String delimiters;
       if (numbers.startsWith("/")) {
-          delimiters = "\n|;";
+          String customDelimiter = "" + numbers.charAt(2);
+          delimiters = "\n|" + customDelimiter;
           return numbers.substring(3).replaceAll("\\s+","").split(delimiters);
       } else {
           delimiters = "\\,|\n";

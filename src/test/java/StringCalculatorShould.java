@@ -60,12 +60,20 @@ public class StringCalculatorShould {
     public void return_6() {
         assertThat(stringCalculator.add("1\n2,3"), is(6));
     }
-    //Support different delimiters
-    //to change a delimiter, the beginning of the string will contain a separate line that looks like this:
-    // “//[delimiter]\n[numbers…]” for example “//;\n1;2” should return three where the default delimiter is ‘;’ .
+
     @Test
-    public void return_3_with_custom_delimiters() {
+    public void return_3_with_custom_delimiter() {
         assertThat(stringCalculator.add("//;\n1;2"), is(3));
+    }
+
+    @Test
+    public void return_3_with_custom_delimiter_2() {
+        assertThat(stringCalculator.add("//'\n1'2"), is(3));
+    }
+
+    @Test
+    public void return_3_with_custom_delimiter_3() {
+        assertThat(stringCalculator.add("//z\n1z2"), is(3));
     }
 
 }
