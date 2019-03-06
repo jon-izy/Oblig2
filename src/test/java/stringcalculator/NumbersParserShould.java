@@ -3,14 +3,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static java.util.List.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.Is.is;
 
 @RunWith(Parameterized.class)
 public class NumbersParserShould {
@@ -38,6 +34,8 @@ public class NumbersParserShould {
         return Arrays.asList(new Object[][] {
                 { "1,2,3", of(1, 2, 3) },
                 { "1\n2\n3", of(1, 2, 3) },
+                { "//;\n1;2", of(1, 2) },
+                { "//[***]\n1***2***3", of(1, 2, 3) },
         });
     }
 }
