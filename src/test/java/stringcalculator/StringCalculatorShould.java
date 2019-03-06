@@ -107,4 +107,13 @@ public class StringCalculatorShould {
     public void return_1008() {
         assertThat(stringCalculator.add("8,1000"), is(1008));
     }
+
+    //Delimiters can be of any length with the following format:
+    // “//[delimiter]\n” for example: “//[***]\n1***2***3”
+    // should return 6
+
+    @Test
+    public void return_16() {
+        assertThat(stringCalculator.add("//[***]\n10***3***3"), is(16));
+    }
 }
