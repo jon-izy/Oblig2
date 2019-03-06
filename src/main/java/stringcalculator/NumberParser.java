@@ -1,34 +1,45 @@
 package stringcalculator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class NumberParser {
+
+    private String delimiter;
+
     public NumberParser() {
+        delimiter = "[,\n]";
     }
 
-    private String[] splitOnComma(String numbers) {
-        String delimiters;
-        if (numbers.startsWith("/")) {
-            int START_OF_SUBSTRING = numbers.indexOf("\n") + 1;
-            String specialDelimiter = numbers.replace("//", "").replace("\n.*", "");
-            System.out.println(specialDelimiter);
-            if (specialDelimiter.length() > 1) System.out.println("specialDelimiter = " + specialDelimiter);
-            String customDelimiter = "" + numbers.charAt(2);
-            delimiters = "" + customDelimiter;
-            return numbers.substring(START_OF_SUBSTRING).split(delimiters);
-        } else {
-            delimiters = "[,\n]";
-            return numbers.split(delimiters);
+    private String[] splitOnDelimiter(String numbers) {
+        if (hasCustomDelimiter(numbers)) {
+            return numbers
+                    .substring(numbers.indexOf("\n") + 1)
+                    .split(extractDelimiter(numbers));
         }
+        return numbers.split(delimiter);
+    }
+
+    private boolean hasCustomDelimiter(String numbers) {
+        return numbers.startsWith("/");
     }
 
     List<Integer> fromStringToNumber(String numbers) {
-
         return Arrays
-                .stream(splitOnComma(numbers))
+                .stream(splitOnDelimiter(numbers))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private String extractDelimiter(String input) {
+        String escapedInput;
+        int START_OF_SUBSTRING = input.indexOf("\n");
+
+        escapedInput = input
+                .substring(0, START_OF_SUBSTRING)
+                .replace("//", "")
+                .replace("[", "")
+                .replace("]", "");
+        return "\\Q" + escapedInput + "\\E";
     }
 }
