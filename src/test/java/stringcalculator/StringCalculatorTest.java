@@ -62,7 +62,7 @@ public class StringCalculatorTest {
     // public void Application_method_input_output()
     @Test
     public void testCase5() {
-        // case5: Calling Add with a negative number will throw an exception “negatives not allowed”
+        // case5: Calling Add with a negative number will throw an exception "negatives not allowed"
         int expectedValue = 0;
         int actualValue = 1;
 
