@@ -2,6 +2,7 @@ package stringcalculator;
 
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.rules.ExpectedException;
 
 public class StringCalculatorTest {
     private StringCalculatorProvider stringCalculator;
@@ -31,10 +32,10 @@ public class StringCalculatorTest {
     // Format for name convention in unit-test methods:
     // public void Application_method_input_output()
     @Test
-    public void testCase3(){
+    public void StringCalculator_Add_NumberString_ReturnsSumOfIntegers(){
         // testCase3: "1\n2,3" add => 6
 
-        String testValue = "";
+        String testValue = "1\n2,3";
         int expectedValue = 6;  //result
 
         stringCalculator = new StringCalculatorProvider();
@@ -49,10 +50,14 @@ public class StringCalculatorTest {
     // Format for name convention in unit-test methods:
     // public void Application_method_input_output()
     @Test
-    public void case4() {
+    public void StringCalculator_AddUsingDelimiter_Numberstring_ReturnsSumOfInteger() {
         // testCase4: "//[delimiter]\n[numbers…]"
-        int expectedValue = 0;
-        int actualValue = 1;
+        String testValue = "//;\n1;2";
+
+        stringCalculator = new StringCalculatorProvider();
+
+        int expectedValue = 3;
+        int actualValue = stringCalculator.add(testValue);
 
         Assert.assertEquals(expectedValue,actualValue);
     }
@@ -63,8 +68,19 @@ public class StringCalculatorTest {
     @Test
     public void testCase5() {
         // case5: Calling Add with a negative number will throw an exception "negatives not allowed"
-        int expectedValue = 0;
-        int actualValue = 1;
+        String testValue = "-1";
+        String actualValue = "0";
+
+        stringCalculator = new StringCalculatorProvider();
+        String expectedValue = "negatives not allowed: -1";
+
+        RuntimeException exception = null;
+        try {
+            actualValue = stringCalculator.add(testValue);
+        }catch (RuntimeException e) {
+            exception = e;
+            actualValue = "negatives not allowed: -1";
+        }
 
         Assert.assertEquals(expectedValue,actualValue);
     }
